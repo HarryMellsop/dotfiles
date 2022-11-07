@@ -45,4 +45,35 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 Plug 'ctrlpvim/ctrlp.vim'
 "}}
 
+"{{ Git integration
+" ---> git commands within vim <---
+Plug 'tpope/vim-fugitive'
+" ---> git changes on the gutter <---
+Plug 'airblade/vim-gitgutter'
+" ---> nerdtree git changes <---
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"}}
+
+"{{ Color-scheme
+Plug 'morhetz/gruvbox'
+set background=dark
+let g:gruvbox_contrast_dark='default'
+"}}
+
+"{{ Autopairs
+" ---> closing XML tags <---
+Plug 'alvan/vim-closetag'
+" ---> files on which to activate tags auto-closing <---
+let g:closetag_filenames ='*.html,*.xhtml,*.xml,*.vue,*.phtml,*.js,*.jsx,*.coffee,*.erb'
+" ---> closing braces and brackets <---
+Plug 'jiangmiao/auto-pairs'
+"}}
+
+"{{ TMux - Vim integration
+Plug 'christoomey/vim-tmux-navigator'
+"}}"
+
 call plug#end()
+
+colorscheme gruvbox
+set updatetime=100
