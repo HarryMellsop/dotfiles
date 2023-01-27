@@ -4,6 +4,16 @@ set nocompatible
 set encoding=utf-8
 filetype plugin indent on
 
+" trigger `autoread` when files changes on disk
+set autoread
+au CursorHold * checktime
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+" ignore venv, git etc. from ctrlp
+let g:ctrlp_custom_ignore = '\v[\/](venv|node_modules|\.git|\.hg|\.svn)$'
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
 	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -60,6 +70,8 @@ set background=dark
 let g:gruvbox_contrast_dark='default'
 "}}
 
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 "{{ Autopairs
 " ---> closing XML tags <---
 Plug 'alvan/vim-closetag'
@@ -69,11 +81,14 @@ let g:closetag_filenames ='*.html,*.xhtml,*.xml,*.vue,*.phtml,*.js,*.jsx,*.coffe
 Plug 'jiangmiao/auto-pairs'
 "}}
 
+Plug 'f-person/git-blame.nvim'
+
 "{{ TMux - Vim integration
 Plug 'christoomey/vim-tmux-navigator'
 "}}"
 
 call plug#end()
 
-colorscheme gruvbox
+colorscheme tokyonight
+
 set updatetime=100
