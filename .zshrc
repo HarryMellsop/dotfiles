@@ -4,6 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/harrymellsop/.oh-my-zsh"
 export PATH=$PATH:${HOME}/Downloads/ispc-v1.14.1-linux/bin
+export PATH=$PATH:${HOME}/sonar-scanner/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,6 +104,7 @@ alias cities="cd Documents/Small\ Projects/Cities\ Project/cities-deadlines/"
 alias cs224="cd Documents/Classes/Junior\ Year/Spring\ Quarter/cs224u && conda activate nlu"
 alias cs231proj="cd Documents/Classes/Junior\ Year/Spring\ Quarter/cs231n/project && conda activate cs231n"
 alias transpose="cd ~/Documents/Work/Transpose/Code.nosync"
+alias vim="nvim"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -121,7 +123,28 @@ unset __conda_setup
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/harrymellsop/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/harrymellsop/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/harrymellsop/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/harrymellsop/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/harrymellsop/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/harrymellsop/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/harrymellsop/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/harrymellsop/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+function petrichor() {
+    cd "/Users/harrymellsop/Documents/Work/Transpose/Code.nosync/petrichor"
+    source env/bin/activate
+    python cli.py $@
+}
+
+function arthur() {
+    cd "/Users/harrymellsop/Documents/Work/Transpose/Code.nosync/arthur"
+    source env/bin/activate
+    python arthur.py $@
+}
+
+function arthur() {
+    cd "/Users/harrymellsop/Documents/Work/Transpose/Code.nosync/arthur"
+    source env/bin/activate
+    python arthur.py $@
+}
+
+export KUBE_EDITOR="nano -w"
