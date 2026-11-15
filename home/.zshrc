@@ -52,23 +52,6 @@ source_if "$HOME/.openclaw/completions/openclaw.zsh"
 alias vim="nvim"
 alias cdantioch="cd ~/Documents/Work/antioch/code.nosync/antioch-monorepo/"
 alias cdantioch2="cd ~/Documents/Work/antioch/code.nosync/antioch-monorepo2/"
-alias transpose="cd ~/Documents/Work/Transpose/Code.nosync"
-alias cities="cd ~/Documents/Small\ Projects/Cities\ Project/cities-deadlines/"
-
-# ---------------------------------------------------------------------------
-# Functions
-# ---------------------------------------------------------------------------
-function petrichor() {
-    cd "$HOME/Documents/Work/Transpose/Code.nosync/petrichor"
-    source env/bin/activate
-    python cli.py "$@"
-}
-
-function arthur() {
-    cd "$HOME/Documents/Work/Transpose/Code.nosync/arthur"
-    source env/bin/activate
-    python arthur.py "$@"
-}
 
 # ---------------------------------------------------------------------------
 # atuin (shell history) — keep near the end so its keybindings win

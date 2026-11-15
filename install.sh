@@ -278,12 +278,12 @@ plugins() {
     skip "tmux not installed — skipping plugins"
   fi
 
-  # vim-plug + plugins (YouCompleteMe compiles, so this can take a few minutes)
+  # vim-plug + plugins
   if have nvim; then
     local plug="$HOME/.local/share/nvim/site/autoload/plug.vim"
     [ -f "$plug" ] || run "vim-plug" curl -fsSLo "$plug" --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim || warn "vim-plug download failed"
-    run "neovim plugins (YouCompleteMe compiles — be patient)" \
+    run "neovim plugins" \
       nvim --headless "+PlugInstall --sync" +qa \
       || warn "some nvim plugins failed — open nvim and run :PlugInstall"
   else

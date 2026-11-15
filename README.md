@@ -16,7 +16,7 @@ It asks two questions up front (CLI tools? GUI apps?) and then runs on its own:
 4. oh-my-zsh
 5. Symlinks everything in [`home/`](home) into `~`. Anything it replaces is moved to `~/.dotfiles-backup/<timestamp>/`
 6. Copies the configs in [`seed/`](seed) once (for apps that rewrite their own settings)
-7. Plugins: tmux (tpm), neovim (vim-plug + YouCompleteMe), bash-preexec for atuin
+7. Plugins: tmux (tpm), neovim (vim-plug), bash-preexec for atuin
 8. Optional logins: `gh auth login`, `atuin login`
 
 Re-running it is safe. Steps that are already done get skipped.

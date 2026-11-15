@@ -37,20 +37,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:stdn_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 "}}
 
-"{{ Configuring YouCompleteMe
-Plug 'valloric/youcompleteme', { 'do': './install.py' }
-" ---> youcompleteme configuration <---
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" ---> compatibility with another plugin (ultisnips) <---
-let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>' ] 
-let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
-let g:SuperTabDefaultCompletionType = '<C-n>'
-" ---> disable preview window <---
-set completeopt-=preview
-" ---> navigating to the definition of a a symbol <---
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"}}
-
 "{{ Configuring CtrlP
 Plug 'ctrlpvim/ctrlp.vim'
 "}}
@@ -65,12 +51,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "}}
 
 "{{ Color-scheme
-Plug 'morhetz/gruvbox'
-set background=dark
-let g:gruvbox_contrast_dark='default'
-"}}
-
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+set background=dark
+"}}
 
 "{{ Autopairs
 " ---> closing XML tags <---
