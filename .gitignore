@@ -4,3 +4,9 @@ __pycache__
 
 # macos
 .DS_Store
+
+# never commit secrets — atuin's sync key/session live in ~/.local/share/atuin, but just in case
+key
+session
+*.db
+*.local

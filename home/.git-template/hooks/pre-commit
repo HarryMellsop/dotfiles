@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Copied into every new/cloned repo via init.templateDir.
+# Runs pre-commit (https://pre-commit.com) when the repo has a config; otherwise a no-op.
+[ -f .pre-commit-config.yaml ] || exit 0
+
+if command -v pre-commit >/dev/null; then
+    HERE="$(cd "$(dirname "$0")" && pwd)"
+    exec pre-commit hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit \
+        --skip-on-missing-config --hook-dir "$HERE" -- "$@"
+fi
+
+echo '`pre-commit` not found but this repo has a .pre-commit-config.yaml — brew install pre-commit' 1>&2
+exit 1

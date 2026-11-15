@@ -1,0 +1,12 @@
+[user]
+	name = Harry Mellsop
+	email = harrymellsop@gmail.com
+[core]
+	editor = nvim
+[push]
+	autoSetupRemote = true
+[init]
+	templateDir = ~/.git-template
+# Machine-specific overrides (e.g. a work email) — not tracked.
+[include]
+	path = ~/.gitconfig.local
