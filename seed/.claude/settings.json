@@ -5,21 +5,13 @@
   "model": "opus",
   "enabledPlugins": {
     "warp@claude-code-warp": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "antioch@antioch": true
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-code-warp": {
       "source": {
         "source": "github",
         "repo": "warpdotdev/claude-code-warp"
-      }
-    },
-    "antioch": {
-      "source": {
-        "source": "github",
-        "repo": "antioch-robotics/antioch-agent-plugin",
-        "ref": "v0.2.24"
       }
     }
   },
@@ -33,6 +25,5 @@
   "skipWorkflowUsageWarning": true,
   "wheelScrollAccelerationEnabled": false,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "skipAutoPermissionPrompt": true
 }

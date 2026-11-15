@@ -32,7 +32,6 @@ if cli
   brew "python@3.11"
   brew "pyenv"
   brew "rustup"
-  brew "openjdk"
 
   # infra & cloud
   brew "hashicorp/tap/terraform"
@@ -40,10 +39,8 @@ if cli
   brew "tflint"
   brew "tfsec"
   brew "helm"
-  brew "kompose"
   brew "step"
   brew "mkcert"
-  brew "nss"
 
   # databases
   brew "postgresql@14"
@@ -55,10 +52,6 @@ if cli
   brew "gemini-cli"
   brew "pandoc"
   brew "graphviz"
-  brew "ghostscript"
-  brew "keyring"
-  brew "flock"
-  brew "dependency-check"
 
   cask "claude-code"
   cask "1password-cli"

@@ -1,77 +1,28 @@
+" Minimal (neo)vim config. Also used as ~/.config/nvim/init.vim.
 syntax on
 set number
 set nocompatible
 set encoding=utf-8
+set updatetime=100
 filetype plugin indent on
 
-" trigger `autoread` when files changes on disk
+" reload buffers when files change on disk (e.g. edits from an agent)
 set autoread
-au CursorHold * checktime
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-" notification after file change
 autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-" ignore venv, git etc. from ctrlp
-let g:ctrlp_custom_ignore = '\v[\/](venv|node_modules|\.git|\.hg|\.svn)$'
-
+" vim-plug, bootstrapped on first launch
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
-" --> plugins <--
-
-"{{ Configuring NerdTree
-Plug 'scrooloose/nerdtree'
-" ---> to hide unwanted files <---
-let NERDTreeIgnore = [ '__pycache__', '\.pyc$', '\.o$', '\.swp',  '*\.swp',  'node_modules/' ]
-" ---> show hidden files <---
-let NERDTreeShowHidden=1
-" ---> autostart nerd-tree when you start vim <---
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:stdn_in") | NERDTree | endif
-"  " ---> toggling nerd-tree using Ctrl-N <---
-map <C-n> :NERDTreeToggle<CR>
-"}}
-
-"{{ Configuring CtrlP
-Plug 'ctrlpvim/ctrlp.vim'
-"}}
-
-"{{ Git integration
-" ---> git commands within vim <---
-Plug 'tpope/vim-fugitive'
-" ---> git changes on the gutter <---
-Plug 'airblade/vim-gitgutter'
-" ---> nerdtree git changes <---
-Plug 'Xuyuanp/nerdtree-git-plugin'
-"}}
-
-"{{ Color-scheme
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-set background=dark
-"}}
-
-"{{ Autopairs
-" ---> closing XML tags <---
-Plug 'alvan/vim-closetag'
-" ---> files on which to activate tags auto-closing <---
-let g:closetag_filenames ='*.html,*.xhtml,*.xml,*.vue,*.phtml,*.js,*.jsx,*.coffee,*.erb'
-" ---> closing braces and brackets <---
-Plug 'jiangmiao/auto-pairs'
-"}}
-
-Plug 'f-person/git-blame.nvim'
-
-"{{ TMux - Vim integration
+" ctrl-h/j/k/l across vim splits and tmux panes (pairs with .tmux.conf)
 Plug 'christoomey/vim-tmux-navigator'
-"}}"
-
 call plug#end()
 
-colorscheme tokyonight
-
-set updatetime=100
+set background=dark
+silent! colorscheme tokyonight
