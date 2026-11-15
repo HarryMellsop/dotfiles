@@ -10,3 +10,6 @@ key
 session
 *.db
 *.local
+
+# installer's record of managed symlinks (per machine)
+.links

@@ -227,7 +227,25 @@ link_dotfiles() {
     link_one "$f" "$HOME/${f#"$DOTFILES/home/"}"
   done < <(find "$DOTFILES/home" -mindepth 1 \( -type f -o -type l \) -not -name .DS_Store -print0 | sort -z)
   [ "$BACKED_UP" -gt 0 ] && info "$BACKED_UP file(s) backed up to ${BACKUP_DIR/#$HOME/$TILDE}"
+  prune_stale_links
   true
+}
+
+# Remove links from a previous run whose file has since been deleted from home/.
+# $DOTFILES/.links (untracked) records every link this script manages.
+prune_stale_links() {
+  local manifest="$DOTFILES/.links" dest
+  if [ -f "$manifest" ]; then
+    while IFS= read -r dest; do
+      case "$(readlink "$dest" 2>/dev/null)" in "$DOTFILES/home/"*) ;; *) continue ;; esac
+      [ -e "$dest" ] && continue
+      if [ "$DRY" = 1 ]; then info "${dest/#$HOME/$TILDE} ${DIM}(would remove stale link)${RESET}"
+      else rm "$dest" && ok "${dest/#$HOME/$TILDE} ${DIM}(removed — no longer in dotfiles)${RESET}"; fi
+    done <"$manifest"
+  fi
+  [ "$DRY" = 1 ] && return
+  find "$DOTFILES/home" -mindepth 1 \( -type f -o -type l \) -not -name .DS_Store \
+    | sed "s|^$DOTFILES/home/|$HOME/|" | sort >"$manifest"
 }
 
 seed_configs() {
@@ -283,8 +301,8 @@ plugins() {
     local plug="$HOME/.local/share/nvim/site/autoload/plug.vim"
     [ -f "$plug" ] || run "vim-plug" curl -fsSLo "$plug" --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim || warn "vim-plug download failed"
-    run "neovim plugins" \
-      nvim --headless "+PlugInstall --sync" +qa \
+    run "neovim plugins (install new, remove unused)" \
+      nvim --headless "+PlugInstall --sync" "+PlugClean!" +qa \
       || warn "some nvim plugins failed — open nvim and run :PlugInstall"
   else
     skip "neovim not installed — skipping plugins"
